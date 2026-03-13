@@ -1,4 +1,4 @@
-using ConsoleRpgEntities.Models;
+﻿using ConsoleRpgEntities.Models;
 using System.Linq;
 using Attribute = ConsoleRpgEntities.Models.Attribute;
 
@@ -21,7 +21,7 @@ using Attribute = ConsoleRpgEntities.Models.Attribute;
 // NOTE FOR STUDENTS:
 // The LINQ pattern for summing equipped item bonuses (for attack and defense) is ALREADY implemented below.
 // Review the code in this file and the README for examples. For the required task, you do not need to change
-// the attack/defense calculation logic�just make sure you understand how it works and how it meets the requirements.
+// the attack/defense calculation logic—just make sure you understand how it works and how it meets the requirements.
 // Focus on understanding the LINQ usage and how equipped items affect combat stats.
 // For stretch goals (monster items, consumables), see the additional TODOs and README guidance.
 
@@ -47,11 +47,22 @@ public class BattleService : IBattleService
 
         while (playerHP > 0 && monsterHP > 0)
         {
+
+            if (playerHP <= player.AbilityScores.HitPoints * 0.3m && player.HasPotion() != null)
+            {
+                playerHP = playerHP + player.UsePotion(playerHP); ;
+                result.Events.Add($"{player.Name} uses a potion to restore health! Player HP: {playerHP}");
+            }
+
+            // If the playerHP reaches below 30% of the maximum Health pool and they have a potion, automatically heals the player equal to the potion's heal value.
+
+
             // ===========================
             // PLAYER ATTACK CALCULATION
             // ===========================
             // TODO: Extend this logic to use equipped items for attack bonuses.
             //       See README for a LINQ example.
+
             int totalAttack = player.GetTotalAttack();
 
             // TODO: (Stretch) Calculate monster's total defense value using items
@@ -85,6 +96,7 @@ public class BattleService : IBattleService
             // ===========================
             // TODO: Extend this logic to use equipped items for defense bonuses.
             //       See README for a LINQ example.
+
             int totalDefense = player.GetTotalDefense();
 
             // Calculate damage to player (minimum 1)
@@ -106,7 +118,9 @@ public class BattleService : IBattleService
             // ===========================
             // TODO: Implement logic for consumable items (e.g., potions) to restore health or provide effects.
             // You may prompt the player to use a potion or automatically use it when health is low.
+
         }
+
         return result;
     }
 }

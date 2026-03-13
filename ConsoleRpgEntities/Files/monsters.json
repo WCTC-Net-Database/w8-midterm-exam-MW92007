@@ -5,7 +5,8 @@
 		"Type": "Goblin",
 		"Level": 1,
 		"Health": 5,
-		"Treasure": "club"
+		"Treasure": "club",
+		"Items": [ "Goblin Stave"]
 	},
 	{
 		"$type": "Goblin",
@@ -13,7 +14,8 @@
 		"Type": "Goblin",
 		"Level": 2,
 		"Health": 7,
-		"Treasure": "dagger"
+		"Treasure": "dagger",
+		"Items": [ "Goblin Stave"]
 	},
 	{
 		"$type": "Goblin",
@@ -21,7 +23,8 @@
 		"Type": "Goblin",
 		"Level": 3,
 		"Health": 12,
-		"Treasure": "golden crown"
+		"Treasure": "golden crown",
+		"Items": [ "Goblin Stave"]
 	},
 	{
 		"$type": "Goblin",
@@ -29,7 +32,8 @@
 		"Type": "Goblin",
 		"Level": 1,
 		"Health": 4,
-		"Treasure": "lockpick"
+		"Treasure": "lockpick",
+		"Items": [ "Goblin Stave"]
 	},
 	{
 		"$type": "Dragon",
@@ -38,7 +42,8 @@
 		"Level": 10,
 		"Health": 100,
 		"FirePower": 50,
-		"Element": "Fire"
+		"Element": "Fire",
+		"Items": [ "Dragon Maw"]
 	},
 	{
 		"$type": "Dragon",
@@ -47,7 +52,8 @@
 		"Level": 8,
 		"Health": 80,
 		"FirePower": 40,
-		"Element": "Ice"
+		"Element": "Ice",
+		"Items": [ "Dragon Maw"]
 	},
 	{
 		"$type": "Dragon",
@@ -56,6 +62,7 @@
 		"Level": 6,
 		"Health": 60,
 		"FirePower": 30,
-		"Element": "Lightning"
+		"Element": "Lightning",
+		"Items": [ "Dragon Maw"]
 	}
 ]

@@ -98,7 +98,7 @@ namespace ConsoleRpgEntities.Data
             {
                 Players = new List<Player>();
             }
-
+            
             // Load Monsters from JSON (unchanged)
             if (File.Exists(_monstersFile))
             {

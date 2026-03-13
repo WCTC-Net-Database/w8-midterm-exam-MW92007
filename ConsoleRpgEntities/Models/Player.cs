@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Collections.Generic;
 using System.Linq;
 using Attribute = ConsoleRpgEntities.Models.Attribute;
 
@@ -49,7 +50,29 @@ namespace ConsoleRpgEntities.Models
             // 4. Add baseAttack and itemAttackBonus together.
             // 5. Return the result.
             // If you prefer, you can use the LINQ code example from the README.md instead of this manual approach.
-            return 42; // <-- Replace this with your calculation!
+
+            int baseDamage = AbilityScores.Attack + Level;
+
+            // Sets the base damage of the character to their level plus their attack trait.
+
+            int itemDamageBonus = 0;
+
+            foreach (Item item in Items)
+            {
+                if (item.IsEquipped && item.AttributeModifiers != null && item.AttributeModifiers.TryGetValue(Attribute.Attack, out int attackBonus))
+                {
+                    itemDamageBonus += attackBonus;
+                }
+            }
+
+            // Loops through the player items and, if they are equipped, have modifiers, and the modifiers are for attack, adds it to the total.
+
+            int totalPlayerDamage = baseDamage + itemDamageBonus;
+
+            // Adds the base and bonus together and then returns the total value.
+
+            return totalPlayerDamage;
+
         }
 
         // Returns the player's total defense value (base + equipped item bonuses).
@@ -68,7 +91,56 @@ namespace ConsoleRpgEntities.Models
             // 4. Add baseDefense and itemDefenseBonus together.
             // 5. Return the result.
             // If you prefer, you can use the LINQ code example from the README.md instead of this manual approach.
-            return 24; // <-- Replace this with your calculation!
+
+            int baseDefense = AbilityScores.Defense;
+            int itemDefenseBonus = 0;
+            // Grabbing the native defense values of the player and setting a variable to hold the item defense bonus.
+
+            foreach (Item item in Items)
+            {
+                if (item.IsEquipped && item.AttributeModifiers != null && item.AttributeModifiers.TryGetValue(Attribute.Defense, out int defenseBonus))
+                {
+                    itemDefenseBonus += defenseBonus;
+                }
+            }
+
+            // Looping through the player's items and, if they are equipped, have modifiers, and the modifiers are for defense, adds it to the total.
+
+            int totalPlayerDefense = baseDefense + itemDefenseBonus;
+
+            // Adds the base and bonus together and then returns the total value.
+
+            return totalPlayerDefense;
+        }
+
+        public String? HasPotion()
+        {
+            foreach (Item item in Items)
+            {
+
+                if (item.IsEquipped && item.Type == "Consumable")
+                {
+                    return item.Name;
+                    // Loops through the player items and detects if a Consumable type item is equipped and returns its name.
+                }
+            }
+
+            return null;
+        }
+
+        public int UsePotion(int playerHP)
+        {
+            foreach (Item item in Items)
+            {
+                if (item.IsEquipped && item.Type == "Consumable" && item.AttributeModifiers != null &&
+                    item.AttributeModifiers.TryGetValue(Attribute.HitPoints, out int healAmount))
+                {
+                    Items.Remove(item);
+                    return healAmount + playerHP;
+                    // If the potion is equipped, a Consumable type, and has modifiers for HitPoints, removes it from item list and returns the value that the player heals
+                }
+            }
+            return 0;
         }
 
     }

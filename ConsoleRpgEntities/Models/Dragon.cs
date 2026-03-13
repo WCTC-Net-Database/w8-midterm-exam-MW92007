@@ -11,7 +11,7 @@ namespace ConsoleRpgEntities.Models
 
         public Dragon() { }
 
-        public Dragon(string name, string type, int level, int health, int firePower, string element)
+        public Dragon(string name, string type, int level, int health, int firePower, string element, List<Item> items)
             : base(name, type, level, health)
         {
             FirePower = firePower;

@@ -23,7 +23,7 @@
     "Name": "Potion",
     "Type": "Consumable",
     "Description": "Restores health.",
-    "IsEquipped": false,
+    "IsEquipped": true,
     "AttributeModifiers": { "HitPoints": 10 }
   },
   {
